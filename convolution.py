@@ -36,3 +36,18 @@ def convolution(image, kernel, average=False, verbose=False):
         plt.imshow(padded_image, cmap='gray')
         plt.title("Padded Image")
         plt.show()
+
+    for row in range(image_row):
+        for col in range(image_col):
+            output[row, col] = np.sum(kernel * padded_image[row:row + kernel_row, col:col + kernel_col])
+            if average:
+                output[row, col] /= kernel.shape[0] * kernel.shape[1]
+ 
+    print("Output Image size : {}".format(output.shape))
+ 
+    if verbose:
+        plt.imshow(output, cmap='gray')
+        plt.title("Output Image using {}X{} Kernel".format(kernel_row, kernel_col))
+        plt.show()
+ 
+    return output

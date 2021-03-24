@@ -45,7 +45,7 @@ if __name__ == '__main__':
     args = vars(ap.parse_args())
     #use open cv 2 to change the image into an array of numbers 
     image = cv2.imread(args["image"]) 
-
     #blur the image using a gaussian filter
     image = gaussian_blur(image, 9, verbose=True)
     sobel_edge_detection(image, filter, verbose=True)
+

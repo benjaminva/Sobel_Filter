@@ -1,7 +1,9 @@
 import numpy as np
 import cv2
 import argparse
+import matplotlib.pyplot as plt
 from convolution import convolution
+from gaussian_blur import gaussian_blur
 
 if __name__ == '__main__':
     #sobel filter mask/kernel 
@@ -13,5 +15,5 @@ if __name__ == '__main__':
     #use open cv 2 to change the image into an array of numbers 
     image = cv2.imread(args["image"]) 
 
-    # To test the first part of convolution function
-    convolution(image, filter, verbose=True)
+    # Blur the image using a gaussian filter
+    image = gaussian_blur(image, 9, verbose=True)

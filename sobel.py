@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from tkinter import *
 import tkinter as tk
 
-imageLoad = ""
+imageLoad = []
 
 class UI(Frame):
     def __init__(self, master, *args, **kwargs):
@@ -30,7 +30,7 @@ class UI(Frame):
     def setImage(self, name):
         file = name.get()
         #use open cv 2 to change the image into an array of numbers 
-        imageLoad = cv2.imread(file)
+        imageLoad.append(cv2.imread(file))
 
 def sobel_edge_detection(image, filter, verbose=False):
     new_image_x = convolution(image, filter, verbose)
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     root = UI(ui).grid()
     ui.mainloop()
 
-    image = imageLoad
+    image = imageLoad[0]
 
     #blur the image using a gaussian filter
     image = gaussian_blur(image, 9, verbose=True)

@@ -14,4 +14,4 @@ if __name__ == '__main__':
     image = cv2.imread(args["image"]) 
 
     # To test the first part of convolution function
-    convolution(image, filter, verbose=True)
+    convolution(image, filter, verbose=True) 

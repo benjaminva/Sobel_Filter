@@ -9,7 +9,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 
-def convolution(image, kernel):
+def convolution(image, kernel, average=False, verbose=False):
     # determine if it is a RGB image, if it is turn it into grayscale.
     if len(image.shape) == 3:
         print("Found 3 Channels : {}".format(image.shape))
@@ -18,4 +18,21 @@ def convolution(image, kernel):
     else:
         print("Image Shape : {}".format(image.shape))
 
-    print("Kernel Shape : {}".format(kernel.shape)) 
+    print("Kernel Shape : {}".format(kernel.shape))
+
+    image_row, image_col = image.shape
+    kernel_row, kernel_col = kernel.shape
+
+    output = np.zeros(image.shape)
+
+    pad_height = int((kernel_row - 1) / 2)
+    pad_width = int((kernel_col - 1) / 2)
+
+    padded_image = np.zeros((image_row + (2 * pad_height), image_col + (2 * pad_width)))
+
+    padded_image[pad_height:padded_image.shape[0] - pad_height, pad_width:padded_image.shape[1] - pad_width] = image
+
+    if verbose:
+        plt.imshow(padded_image, cmap='gray')
+        plt.title("Padded Image")
+        plt.show()

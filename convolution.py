@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 
 def convolution(image, kernel, average=False, verbose=False):
+    print(image)
     # determine if it is a RGB image, if it is turn it into grayscale.
     if len(image.shape) == 3:
         print("Found 3 Channels : {}".format(image.shape))

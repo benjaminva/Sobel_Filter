@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from tkinter import *
 import tkinter as tk
 
+imageLoad = ""
+
 class UI(Frame):
     def __init__(self, master, *args, **kwargs):
         Frame.__init__(self, master, *args, **kwargs)
@@ -22,8 +24,13 @@ class UI(Frame):
         self.display = userInput
         self.display.grid(row=1, column=0, columnspan=1, sticky="nsew")
 
-        self.ceButton = Button(self, font=("Arial", 12), fg='black', text="Comenzar", command = lambda: start(userInput))
+        self.ceButton = Button(self, font=("Arial", 12), fg='black', text="Comenzar", command = lambda: self.setImage(userInput))
         self.ceButton.grid(row=2, column=0, sticky="nsew")
+
+    def setImage(self, name):
+        file = name.get()
+        #use open cv 2 to change the image into an array of numbers 
+        imageLoad = cv2.imread(file)
 
 def sobel_edge_detection(image, filter, verbose=False):
     new_image_x = convolution(image, filter, verbose)
@@ -59,19 +66,15 @@ def sobel_edge_detection(image, filter, verbose=False):
 if __name__ == '__main__':
     #sobel filter mask/kernel 
     filter = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
-    #get image arguments from the shell  "python sobel.py -i image.jpg"
-    ap = argparse.ArgumentParser()
-    """ap.add_argument("-i", "--image", required=True, help="Path to the image")
-    args = vars(ap.parse_args())
-    #use open cv 2 to change the image into an array of numbers 
-    image = cv2.imread(args["image"]) 
-    """
+
     ui = Tk()
     ui.title("Proyecto Semana TEC")
     ui.config(bg="#000000", cursor="cross", height="350", width="350", relief="groove")
     ui.resizable(False, False)
     root = UI(ui).grid()
     ui.mainloop()
+
+    image = imageLoad
 
     #blur the image using a gaussian filter
     image = gaussian_blur(image, 9, verbose=True)

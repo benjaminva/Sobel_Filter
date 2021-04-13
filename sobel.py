@@ -22,7 +22,7 @@ class UI(Frame):
         self.display = userInput
         self.display.grid(row=1, column=0, columnspan=1, sticky="nsew")
 
-        self.ceButton = Button(self, font=("Arial", 12), fg='black', text="ocultamiento", command = lambda: start(userInput))
+        self.ceButton = Button(self, font=("Arial", 12), fg='black', text="Comenzar", command = lambda: start(userInput))
         self.ceButton.grid(row=2, column=0, sticky="nsew")
 
 def sobel_edge_detection(image, filter, verbose=False):
